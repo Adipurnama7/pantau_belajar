@@ -82,6 +82,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 20),
             MyButton(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Image.asset(
                     "images/google.png",
