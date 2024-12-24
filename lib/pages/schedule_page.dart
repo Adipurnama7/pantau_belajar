@@ -16,25 +16,29 @@ class _SchedulePageState extends State<SchedulePage> {
 
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text(
+            "Jadwal",
+            style: GoogleFonts.poppins(
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+              color: const Color.fromARGB(255, 57, 42, 171),
+            ),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Jadwal",
-                  style: GoogleFonts.poppins(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                    color: const Color.fromARGB(255, 57, 42, 171),
-                  ),
-                ),
                 const SizedBox(height: 10),
                 ListView.builder(
                   itemCount: 6, // Misalnya, ada 6 data jadwal
                   shrinkWrap: true, // Agar tidak mengambil seluruh tinggi layar
-                  physics: const NeverScrollableScrollPhysics(), // Menghindari konflik scroll
+                  physics:
+                      const NeverScrollableScrollPhysics(), // Menghindari konflik scroll
                   itemBuilder: (context, index) {
                     return Column(
                       children: [

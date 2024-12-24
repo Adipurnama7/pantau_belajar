@@ -58,6 +58,9 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               SizedBox(height: 30),
               MyButton(
+                onTap: () {
+                  
+                },
                 child: Text(
                   'Register',
                   style: TextStyle(
@@ -80,6 +83,9 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               SizedBox(height: 20),
               MyButton(
+                onTap: () {
+                  
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

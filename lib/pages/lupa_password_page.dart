@@ -40,6 +40,9 @@ class _LupaPasswordPageState extends State<LupaPasswordPage> {
               ),
               SizedBox(height: 30),
               MyButton(
+                onTap: () {
+                  
+                },
                 child: Text(
                   'Kirim Permintaan Reset',
                   style: TextStyle(
