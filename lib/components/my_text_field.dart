@@ -4,7 +4,7 @@ class MyTextField extends StatelessWidget {
   final String hintText;
   final Widget? icon;
   final TextEditingController textEditingController;
-  MyTextField({
+  const MyTextField({
     super.key,
     required this.hintText,
     required this.icon,
@@ -19,7 +19,7 @@ class MyTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         icon: icon,
-        focusedBorder: UnderlineInputBorder(
+        focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
             color: Colors.black,
           ),

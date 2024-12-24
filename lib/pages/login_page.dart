@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pantau_belajar/components/my_button.dart';
 import 'package:pantau_belajar/components/my_text_field.dart';
+import 'package:pantau_belajar/pages/lupa_password_page.dart';
+import 'package:pantau_belajar/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -48,11 +50,22 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  'Lupa Password? ',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w900,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LupaPasswordPage(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Lupa Password? ',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w900,
+                      color: Color.fromARGB(255, 57, 42, 171), // Warna teks
+                    ),
                   ),
                 ),
               ],
@@ -98,6 +111,36 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               color: Color.fromARGB(255, 171, 171, 171),
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Belum memiliki akun? ",
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RegisterPage(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "Register",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w900,
+                      color: Color.fromARGB(255, 57, 42, 171),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
