@@ -1,10 +1,226 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pantau_belajar/components/my_button.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    double screenWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Good Morning",
+                        style: GoogleFonts.poppins(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromARGB(255, 110, 110, 110),
+                        ),
+                      ),
+                      Text(
+                        "Abidzar Giffari",
+                        style: GoogleFonts.poppins(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700,
+                            color: Color.fromARGB(255, 57, 42, 171)),
+                      ),
+                    ],
+                  ),
+                  Image.asset(
+                    'images/avatar.png',
+                    height: 80,
+                  )
+                ],
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 25,
+                  vertical: 15,
+                ),
+                width: screenWidth,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 57, 42, 171),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Senin',
+                      style: GoogleFonts.poppins(
+                        fontSize: 26,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Due Date',
+                      style: GoogleFonts.poppins(
+                        fontSize: 11 + screenWidth * 0.01,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    SizedBox(height: 3),
+                    Text(
+                      'YY-MM-DD',
+                      style: GoogleFonts.poppins(
+                        fontSize: 12 + screenWidth * 0.01,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 7),
+                    Container(
+                      width: screenWidth,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 232, 122, 48),
+                          borderRadius: BorderRadius.circular(30)),
+                      child: Text(
+                        'Hari ini tidak ada kuliah',
+                        style: GoogleFonts.poppins(
+                          fontSize: 9 + screenWidth * 0.01,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Kelas Hari Ini',
+                style: GoogleFonts.poppins(
+                  fontSize: 15 + screenWidth * 0.01,
+                  color: Color.fromARGB(255, 232, 122, 48),
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              Container(
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      alignment: Alignment.topLeft,
+                      width: screenWidth,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 0.2,
+                        ),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Embedded System',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 12 + screenWidth * 0.01,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 5),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    color: Color.fromARGB(255, 65, 163, 254)),
+                                child: Text(
+                                  '301',
+                                  style:
+                                      GoogleFonts.poppins(color: Colors.white),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [Text('Jam'), Text('10:20 - 12:00')],
+                              ),
+                            ],
+                          ),
+                          Divider(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Kewirausahaaan',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 12 + screenWidth * 0.01,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 5),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    color: Color.fromARGB(255, 93, 173, 110)),
+                                child: Text(
+                                  '401',
+                                  style:
+                                      GoogleFonts.poppins(color: Colors.white),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [Text('Jam'), Text('15:30 - 17:10')],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              MyButton(
+                  color: Color.fromARGB(255, 57, 42, 171),
+                  child: Text('Cek Jadwal Lain', style: GoogleFonts.poppins(
+                    color: Colors.white
+                  ),))
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
