@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:pantau_belajar/pages/home_page.dart';
+import 'package:pantau_belajar/pages/schedule_page.dart';
 
 class MainPage extends StatefulWidget {
   final int? bottomNavIdx;
@@ -30,8 +31,8 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> tabs = [
     HomePage(),
-    HomePage(),
-    HomePage() // Halaman untuk notifikasi
+    SchedulePage(),
+    HomePage(), // Halaman untuk notifikasi
   ];
 
   @override

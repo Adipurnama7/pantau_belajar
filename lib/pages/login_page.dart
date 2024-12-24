@@ -61,9 +61,14 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 30),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(),
+                    ));
               },
               child: MyButton(
+                onTap: () {},
                 child: Text(
                   'Login',
                   style: TextStyle(
@@ -87,6 +92,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 20),
             MyButton(
+              onTap: () {},
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pantau_belajar/components/my_button.dart';
+import 'package:pantau_belajar/components/my_custom_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -44,67 +44,8 @@ class HomePage extends StatelessWidget {
                   )
                 ],
               ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 25,
-                  vertical: 15,
-                ),
-                width: screenWidth,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 57, 42, 171),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Senin',
-                      style: GoogleFonts.poppins(
-                        fontSize: 26,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'Due Date',
-                      style: GoogleFonts.poppins(
-                        fontSize: 11 + screenWidth * 0.01,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    SizedBox(height: 3),
-                    Text(
-                      'YY-MM-DD',
-                      style: GoogleFonts.poppins(
-                        fontSize: 12 + screenWidth * 0.01,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(height: 7),
-                    Container(
-                      width: screenWidth,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 232, 122, 48),
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Text(
-                        'Hari ini tidak ada kuliah',
-                        style: GoogleFonts.poppins(
-                          fontSize: 9 + screenWidth * 0.01,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              MyCustomCard(
+                  day: 'Senin', dueDate: 'YY-MM-DD', message: 'message', screenWidth: 10,),
               SizedBox(height: 20),
               Text(
                 'Kelas Hari Ini',
@@ -114,6 +55,7 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
               ),
+              SizedBox(height: 10),
               Container(
                 child: Column(
                   children: [
@@ -162,7 +104,10 @@ class HomePage extends StatelessWidget {
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [Text('Jam'), Text('10:20 - 12:00')],
+                                children: [
+                                  Text('Jam'),
+                                  Text('10:20 - 12:00'),
+                                ],
                               ),
                             ],
                           ),
@@ -212,11 +157,7 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              MyButton(
-                  color: Color.fromARGB(255, 57, 42, 171),
-                  child: Text('Cek Jadwal Lain', style: GoogleFonts.poppins(
-                    color: Colors.white
-                  ),))
+              
             ],
           ),
         ),

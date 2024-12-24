@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 class MyButton extends StatelessWidget {
   final Color? color;
   final Widget? child;
-  MyButton({super.key, required this.color, required this.child});
+  final void Function()? onTap;
+  MyButton({super.key, required this.color, required this.child, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: 10,
