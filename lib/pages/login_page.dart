@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pantau_belajar/components/my_button.dart';
 import 'package:pantau_belajar/components/my_text_field.dart';
+<<<<<<< HEAD
 import 'package:pantau_belajar/pages/lupa_password_page.dart';
 import 'package:pantau_belajar/pages/register_page.dart';
+=======
+import 'package:pantau_belajar/pages/home_page.dart';
+>>>>>>> fe00cd5a926867499e655ab143a885d34ed35ee4
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -71,16 +75,21 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             SizedBox(height: 30),
-            MyButton(
-              child: Text(
-                'Login',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w900,
-                  color: Colors.white,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
+              },
+              child: MyButton(
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                  ),
                 ),
+                color: Color.fromARGB(255, 57, 42, 171),
               ),
-              color: Color.fromARGB(255, 57, 42, 171),
             ),
             SizedBox(height: 20),
             Center(
