@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pantau_belajar/components/my_custom_card.dart';
+import 'package:pantau_belajar/pages/detail_schedule_page.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({super.key});
@@ -43,11 +44,16 @@ class _SchedulePageState extends State<SchedulePage> {
                     return Column(
                       children: [
                         const SizedBox(height: 10),
-                        MyCustomCard(
-                          day: 'Senin',
-                          dueDate: '2023-12-25', // Ganti dengan tanggal relevan
-                          message: 'Hari ini tidak ada kuliah',
-                          screenWidth: screenWidth,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => DetailSchedulePage(),));
+                          },
+                          child: MyCustomCard(
+                            day: 'Belajar Flutter',
+                            dueDate: '2023-12-25', // Ganti dengan tanggal relevan
+                            message: 'Hari ini tidak ada kuliah',
+                            screenWidth: screenWidth,
+                          ),
                         ),
                       ],
                     );
