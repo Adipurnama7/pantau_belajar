@@ -92,7 +92,6 @@ class MySchedule extends StatelessWidget {
                         ),
                       ],
                     ),
-                    if (item != scheduleItems.last) const Divider(),
                   ],
                 ),
               ),

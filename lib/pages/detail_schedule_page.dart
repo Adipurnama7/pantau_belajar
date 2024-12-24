@@ -40,13 +40,73 @@ class _DetailSchedulePageState extends State<DetailSchedulePage> {
                       room: '301',
                       time: '10:20 - 12:00',
                       color: const Color.fromARGB(255, 65, 163, 254),
-                    ),
+                    )
+                  ],
+                ),
+                MySchedule(
+                  day: 'Selasa',
+                  scheduleItems: [
                     ScheduleItem(
-                      title: 'Kewirausahaan',
-                      room: '401',
-                      time: '15:30 - 17:10',
-                      color: const Color.fromARGB(255, 93, 173, 110),
-                    ),
+                      title: 'Embedded System',
+                      room: '301',
+                      time: '10:20 - 12:00',
+                      color: const Color.fromARGB(255, 65, 163, 254),
+                    )
+                  ],
+                ),
+                MySchedule(
+                  day: 'Rabu',
+                  scheduleItems: [
+                    ScheduleItem(
+                      title: 'Embedded System',
+                      room: '301',
+                      time: '10:20 - 12:00',
+                      color: const Color.fromARGB(255, 65, 163, 254),
+                    )
+                  ],
+                ),
+                MySchedule(
+                  day: 'Kamis',
+                  scheduleItems: [
+                    ScheduleItem(
+                      title: 'Embedded System',
+                      room: '301',
+                      time: '10:20 - 12:00',
+                      color: const Color.fromARGB(255, 65, 163, 254),
+                    )
+                  ],
+                ),
+                MySchedule(
+                  day: 'Jumat',
+                  scheduleItems: [
+                    ScheduleItem(
+                      title: 'Embedded System',
+                      room: '301',
+                      time: '10:20 - 12:00',
+                      color: const Color.fromARGB(255, 65, 163, 254),
+                    )
+                  ],
+                ),
+                MySchedule(
+                  day: 'Sabtu',
+                  scheduleItems: [
+                    ScheduleItem(
+                      title: 'Embedded System',
+                      room: '301',
+                      time: '10:20 - 12:00',
+                      color: const Color.fromARGB(255, 65, 163, 254),
+                    )
+                  ],
+                ),
+                MySchedule(
+                  day: 'Minggu',
+                  scheduleItems: [
+                    ScheduleItem(
+                      title: 'Embedded System',
+                      room: '301',
+                      time: '10:20 - 12:00',
+                      color: const Color.fromARGB(255, 65, 163, 254),
+                    )
                   ],
                 ),
               ],
