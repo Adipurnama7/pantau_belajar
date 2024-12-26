@@ -18,6 +18,7 @@ class _SchedulePageState extends State<SchedulePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           title: Text(
             "Jadwal",

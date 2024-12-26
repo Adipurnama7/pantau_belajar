@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pantau_belajar/components/my_custom_card.dart';
+import 'package:pantau_belajar/pages/profile_page.dart';
+import 'package:pantau_belajar/services/user_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,6 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    UserService userService = UserService();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -38,14 +42,30 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Image.asset(
-                    'images/avatar.png',
-                    height: 80,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return ProfilePage();
+                          },
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      'images/avatar.png',
+                      height: 80,
+                    ),
                   )
                 ],
               ),
               MyCustomCard(
-                  day: 'Senin', dueDate: 'YY-MM-DD', message: 'message', screenWidth: 10,),
+                day: 'Senin',
+                dueDate: 'YY-MM-DD',
+                message: 'message',
+                screenWidth: 10,
+              ),
               SizedBox(height: 20),
               Text(
                 'Kelas Hari Ini',
@@ -157,7 +177,6 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              
             ],
           ),
         ),

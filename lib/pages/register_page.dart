@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pantau_belajar/components/my_button.dart';
 import 'package:pantau_belajar/components/my_text_field.dart';
+import 'package:pantau_belajar/models/app_user.dart';
+import 'package:pantau_belajar/pages/auth_page.dart';
 import 'package:pantau_belajar/pages/login_page.dart';
+import 'package:pantau_belajar/services/user_service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -59,7 +62,8 @@ class _RegisterPageState extends State<RegisterPage> {
               SizedBox(height: 30),
               MyButton(
                 onTap: () {
-                  
+                  register(context, nameController, emailController,
+                      passwordController, confirmPasswordController);
                 },
                 child: Text(
                   'Register',
@@ -139,5 +143,96 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+
+  void register(
+    BuildContext context,
+    TextEditingController nameController,
+    TextEditingController emailController,
+    TextEditingController passwordController,
+    TextEditingController confirmPasswordController,
+  ) async {
+    String name = nameController.text.trim();
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+    String confirmPassword = confirmPasswordController.text.trim();
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
+    if (name.isEmpty) {
+      Navigator.pop(context);
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Masukkan Nama Anda'),
+          ),
+        );
+        return;
+      }
+    }
+    if (email.isEmpty) {
+      Navigator.pop(context);
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Masukkan Email Anda'),
+          ),
+        );
+        return;
+      }
+    }
+    if (password.isEmpty) {
+      Navigator.pop(context);
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Masukkan Password Anda'),
+          ),
+        );
+      }
+      return;
+    }
+    if (confirmPassword.isEmpty) {
+      Navigator.pop(context);
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Ulangi Password Anda'),
+          ),
+        );
+      }
+      return;
+    }
+    UserService userService = UserService();
+
+    try {
+      AppUser? user =
+          await userService.registerWithEmailPassword(email, password, name);
+      if (user != null && context.mounted) {
+        Navigator.pop(context);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return AuthPage();
+            },
+          ),
+        );
+      }
+    } catch (e) {
+      Navigator.pop(context);
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Login error: $e")),
+        );
+      }
+    }
   }
 }

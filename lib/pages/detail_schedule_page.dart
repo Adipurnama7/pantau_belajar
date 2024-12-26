@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pantau_belajar/components/my_custom_card.dart';
 import 'package:pantau_belajar/components/my_schedule.dart';
 
