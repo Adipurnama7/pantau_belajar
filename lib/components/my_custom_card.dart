@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyCustomCard extends StatelessWidget {
-  final String day;
-  final String dueDate;
-  final String message;
+  final String title;
+  final String heading;
+  final String subheading;
+  final String descrirkption;
 
   const MyCustomCard({
     Key? key,
-    required this.day,
-    required this.dueDate,
-    required this.message, required double screenWidth,
+    required this.title,
+    required this.heading,
+    required this.subheading,
+    required this.description, required double screenWidth,
   }) : super(key: key);
 
   @override
@@ -30,7 +32,7 @@ class MyCustomCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            day,
+            title,
             style: GoogleFonts.poppins(
               fontSize: 26,
               color: Colors.white,
@@ -39,7 +41,7 @@ class MyCustomCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            'Due Date',
+            heading,
             style: GoogleFonts.poppins(
               fontSize: 11 + screenWidth * 0.01,
               color: Colors.white,
@@ -48,7 +50,7 @@ class MyCustomCard extends StatelessWidget {
           ),
           const SizedBox(height: 3),
           Text(
-            dueDate,
+            subheading,
             style: GoogleFonts.poppins(
               fontSize: 12 + screenWidth * 0.01,
               color: Colors.white,
@@ -67,7 +69,7 @@ class MyCustomCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
             ),
             child: Text(
-              message,
+              description,
               style: GoogleFonts.poppins(
                 fontSize: 9 + screenWidth * 0.01,
                 color: Colors.white,

@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset("images/login.jpg"),
+              Image.asset("images/login.png"),
               Text(
                 "Login",
                 style: TextStyle(
@@ -205,9 +205,9 @@ class _LoginPageState extends State<LoginPage> {
     UserService userService = UserService();
 
     try {
+      Navigator.pop(context);
       AppUser? user = await userService.loginWithEmailPassword(email, password);
       if (user != null && context.mounted) {
-        Navigator.pop(context);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -218,8 +218,8 @@ class _LoginPageState extends State<LoginPage> {
         );
       }
     } catch (e) {
-      Navigator.pop(context);
       if (context.mounted) {
+      Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Login error: $e")),
         );

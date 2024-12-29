@@ -24,9 +24,10 @@ class _DetailSchedulePageState extends State<DetailSchedulePage> {
               children: [
                 // MyCustomCard Component
                 MyCustomCard(
-                  day: 'Belajar Flutter',
-                  dueDate: '2023-12-25',
-                  message: 'Hari ini tidak ada kuliah',
+                  title: 'Belajar Flutter',
+                  heading: 'Due Date',
+                  subheading: '2023-12-25',
+                  description: 'Hari ini tidak ada kuliah',
                   screenWidth: screenWidth,
                 ),
                 const SizedBox(height: 20),

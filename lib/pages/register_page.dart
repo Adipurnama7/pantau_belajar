@@ -30,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 50),
-              Image.asset("images/register.jpg"),
+              Image.asset("images/register.png"),
               Text(
                 "Register",
                 style: TextStyle(
