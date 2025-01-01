@@ -22,7 +22,6 @@ class UserService {
         return null; // User not found
       }
     } catch (e) {
-      print("Error retrieving user by UID: $e");
       return null;
     }
   }
@@ -37,8 +36,8 @@ class UserService {
     return await getUserByUid(firebaseUser.uid);
   }
 
-  Future<AppUser?> registerWithEmailPassword(String email, String password,
-      String name) async {
+  Future<AppUser?> registerWithEmailPassword(
+      String email, String password, String name) async {
     try {
       UserCredential userCredential =
           await firebaseAuth.createUserWithEmailAndPassword(
@@ -92,6 +91,14 @@ class UserService {
       return userList;
     } catch (e) {
       throw Exception('Failed to load users: $e');
+    }
+  }
+
+  Future<void> sendPasswordResetLink(String email) async {
+    try {
+      await firebaseAuth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      throw Exception('Error: $e');
     }
   }
 }

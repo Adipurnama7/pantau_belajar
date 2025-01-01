@@ -1,31 +1,47 @@
-class AppUser {
-  String uid;
-  String title;
-  String day;
-  DateTime time;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  // Constructor untuk menginisialisasi variabel instance
-  AppUser({
+class Schedule {
+  final String id;
+  final String uid;
+  final String title;
+  final String heading;
+  final String subheading;
+  final String description;
+  final Timestamp timestamp;
+
+  Schedule({
+    required this.title,
+    required this.heading,
+    required this.subheading,
+    required this.description,
+    required this.id,
     required this.uid,
-    required this.username,
-    required this.email,
+    required this.timestamp,
   });
 
-  // Method untuk mengubah data user menjadi map (misalnya untuk penyimpanan atau API)
+  // Method untuk mengubah data menjadi Map, bisa digunakan untuk serialisasi atau penyimpanan
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'uid': uid,
-      'username': username,
-      'email': email,
+      'title': title,
+      'heading': heading,
+      'subheading': subheading,
+      'description': description,
+      'timestamp': timestamp,
     };
   }
 
-  // Factory constructor untuk membuat user dari map (misalnya untuk parsing data JSON)
-  factory AppUser.fromMap(Map<String, dynamic> map) {
-    return AppUser(
+  // Method untuk membuat Schedule dari Map (misalnya dari database atau API)
+  factory Schedule.fromMap(Map<String, dynamic> map) {
+    return Schedule(
+      id: map['id'],
       uid: map['uid'],
-      username: map['username'],
-      email: map['email'],
+      title: map['title'],
+      heading: map['heading'],
+      subheading: map['subheading'],
+      description: map['description'],
+      timestamp: map['timestamp'],
     );
   }
 }

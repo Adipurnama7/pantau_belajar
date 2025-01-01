@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pantau_belajar/components/my_custom_card.dart';
+import 'package:pantau_belajar/components/my_popup.dart';
+import 'package:pantau_belajar/pages/add_schedule_page.dart';
 import 'package:pantau_belajar/pages/detail_schedule_page.dart';
+import 'package:pantau_belajar/models/schedule.dart';
+import 'package:pantau_belajar/services/schedule_service.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({super.key});
@@ -11,7 +16,7 @@ class SchedulePage extends StatefulWidget {
 }
 
 class _SchedulePageState extends State<SchedulePage> {
-
+  final ScheduleService _scheduleService = ScheduleService();
 
   @override
   Widget build(BuildContext context) {
@@ -20,60 +25,16 @@ class _SchedulePageState extends State<SchedulePage> {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 5.0,
-                  horizontal: 25.0,
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 200,
-                      width: 300,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              "https://images.pexels.com/photos/26600774/pexels-photo-26600774/free-photo-of-a-polar-bear-is-swimming-in-the-water.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
-                        ),
-                      ),
-                    ),
-                    const Text(
-                      "Polar Bear",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
-                      ),
-                    ),
-                    const Text(
-                      "The polar bear is a large bear native to the Arctic and nearby areas. It is closely related to the brown bear, and the two species can interbreed. The polar bear is the largest extant species of bear and land carnivore, with adult males weighing 300–800 kg.",
-                    ),
-                    ListTile(
-                      leading: const Icon(
-                        Icons.share,
-                      ),
-                      title: const Text(
-                        "Share",
-                      ),
-                      onTap: () {
-                        Navigator.pop(
-                          context,
-                        );
-                      },
-                    )
-                  ],
-                ),
-              );
-            },
-          );
-        },
-        child: const Icon(
-          Icons.open_in_browser,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddSchedulePage(),
+              ),
+            );
+          },
+          child: const Icon(Icons.add),
         ),
-      ),
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
@@ -88,38 +49,91 @@ class _SchedulePageState extends State<SchedulePage> {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 10),
-                ListView.builder(
-                  itemCount: 6, // Misalnya, ada 6 data jadwal
-                  shrinkWrap: true, // Agar tidak mengambil seluruh tinggi layar
-                  physics:
-                      const NeverScrollableScrollPhysics(), // Menghindari konflik scroll
+          child: StreamBuilder<List<Schedule>>(
+            stream: _scheduleService.getSchedulesStream(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return const Center(child: Text('Terjadi kesalahan.'));
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Center(child: Text('Belum ada jadwal.'));
+              } else {
+                final schedules = snapshot.data!;
+                return ListView.builder(
+                  itemCount: schedules.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
+                    final schedule = schedules[index];
                     return Column(
                       children: [
                         const SizedBox(height: 10),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => DetailSchedulePage(),));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailSchedulePage(
+                                  schedule: schedule,
+                                ),
+                              ),
+                            );
                           },
-                          child: MyCustomCard(
-                            title: 'Belajar Flutter',
-                            heading: 'Due Date',
-                            subheading: '2023-12-25', // Ganti dengan tanggal relevan
-                            description: 'Hari ini tidak ada kuliah',
-                            screenWidth: screenWidth,
+                          child: Slidable(
+                            endActionPane: ActionPane(
+                              motion: StretchMotion(),
+                              children: [
+                                SlidableAction(
+                                  onPressed: (context) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AddSchedulePage(
+                                          schedule: schedule,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  icon: Icons.edit,
+                                  backgroundColor: Colors.amber,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                SlidableAction(
+                                  onPressed: (context) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => MyPopup(
+                                        message:
+                                            'Apakah anda yakin ingin menghapus jadwal dan semua isinya?',
+                                        onConfirm: () {
+                                          _scheduleService
+                                              .deleteSchedule(schedule.id);
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  icon: Icons.delete,
+                                  backgroundColor: Colors.red,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ],
+                            ),
+                            child: MyCustomCard(
+                              title: schedule.title,
+                              heading: schedule.heading,
+                              subheading: schedule.subheading,
+                              description: schedule.description,
+                              screenWidth: screenWidth,
+                            ),
                           ),
                         ),
                       ],
                     );
                   },
-                ),
-              ],
-            ),
+                );
+              }
+            },
           ),
         ),
       ),

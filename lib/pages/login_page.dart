@@ -4,6 +4,7 @@ import 'package:pantau_belajar/components/my_text_field.dart';
 import 'package:pantau_belajar/models/app_user.dart';
 import 'package:pantau_belajar/pages/auth_page.dart';
 import 'package:pantau_belajar/pages/home_page.dart';
+import 'package:pantau_belajar/pages/lupa_password_page.dart';
 import 'package:pantau_belajar/pages/register_page.dart';
 import 'package:pantau_belajar/services/user_service.dart';
 
@@ -36,55 +37,64 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset("images/login.png"),
-              Text(
+              const Text(
                 "Login",
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w900,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               MyTextField(
                 textEditingController: emailController,
                 hintText: "Email",
-                icon: Icon(
+                icon: const Icon(
                   Icons.email,
                 ),
               ),
               MyTextField(
+                obscureText: true,
                 textEditingController: passwordController,
                 hintText: "Password",
-                icon: Icon(
+                icon: const Icon(
                   Icons.lock,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(
-                    'Lupa Password? ',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w900,
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LupaPasswordPage(),
+                        )),
+                    child: Text(
+                      'Lupa Password? ',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) => const HomePage(),
                       ));
                 },
                 child: MyButton(
                   onTap: () {
                     login(context, emailController, passwordController);
                   },
-                  child: Text(
+                  color: const Color.fromARGB(255, 57, 42, 171),
+                  child: const Text(
                     'Login',
                     style: TextStyle(
                       fontSize: 20,
@@ -92,45 +102,13 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white,
                     ),
                   ),
-                  color: Color.fromARGB(255, 57, 42, 171),
                 ),
               ),
-              SizedBox(height: 20),
-              Center(
-                child: Text(
-                  'OR',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              MyButton(
-                onTap: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image.asset(
-                      "images/google.png",
-                      height: 20,
-                    ),
-                    Text(
-                      'Login With Google',
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    )
-                  ],
-                ),
-                color: Color.fromARGB(255, 171, 171, 171),
-              ),
-              SizedBox(height: 10),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Sudah memiliki akun? ",
                     style: TextStyle(
                       fontSize: 14,
@@ -141,11 +119,11 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RegisterPage(),
+                          builder: (context) => const RegisterPage(),
                         ),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       "Register",
                       style: TextStyle(
                         fontSize: 14,
@@ -174,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
     showDialog(
       context: context,
       builder: (context) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },
@@ -212,14 +190,14 @@ class _LoginPageState extends State<LoginPage> {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return AuthPage();
+              return const AuthPage();
             },
           ),
         );
       }
     } catch (e) {
       if (context.mounted) {
-      Navigator.pop(context);
+        Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Login error: $e")),
         );

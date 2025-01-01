@@ -5,25 +5,26 @@ class MyCustomCard extends StatelessWidget {
   final String title;
   final String heading;
   final String subheading;
-  final String descrirkption;
+  final String description;
 
   const MyCustomCard({
     Key? key,
     required this.title,
     required this.heading,
     required this.subheading,
-    required this.description, required double screenWidth,
+    required this.description,
+    double? screenWidth,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    double _screenWidth = MediaQuery.of(context).size.width;
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 25,
         vertical: 15,
       ),
-      width: screenWidth,
+      width: _screenWidth,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 57, 42, 171),
         borderRadius: BorderRadius.circular(30),
@@ -43,7 +44,7 @@ class MyCustomCard extends StatelessWidget {
           Text(
             heading,
             style: GoogleFonts.poppins(
-              fontSize: 11 + screenWidth * 0.01,
+              fontSize: 11 + _screenWidth * 0.01,
               color: Colors.white,
               fontWeight: FontWeight.w400,
             ),
@@ -52,14 +53,14 @@ class MyCustomCard extends StatelessWidget {
           Text(
             subheading,
             style: GoogleFonts.poppins(
-              fontSize: 12 + screenWidth * 0.01,
+              fontSize: 12 + _screenWidth * 0.01,
               color: Colors.white,
               fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 7),
           Container(
-            width: screenWidth,
+            width: _screenWidth,
             padding: const EdgeInsets.symmetric(
               horizontal: 8,
               vertical: 4,
@@ -71,7 +72,7 @@ class MyCustomCard extends StatelessWidget {
             child: Text(
               description,
               style: GoogleFonts.poppins(
-                fontSize: 9 + screenWidth * 0.01,
+                fontSize: 9 + _screenWidth * 0.01,
                 color: Colors.white,
                 fontWeight: FontWeight.w400,
               ),

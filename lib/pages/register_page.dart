@@ -29,43 +29,50 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 50),
-              Image.asset("images/register.png"),
-              Text(
+              const SizedBox(height: 50),
+              Center(
+                  child: Image.asset(
+                "images/register.png",
+                height: 250,
+              )),
+              const Text(
                 "Register",
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w900,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               MyTextField(
                 textEditingController: nameController,
                 hintText: "Nama Lengkap",
-                icon: Icon(Icons.person),
+                icon: const Icon(Icons.person),
               ),
               MyTextField(
                 textEditingController: emailController,
                 hintText: "Email",
-                icon: Icon(Icons.email),
+                icon: const Icon(Icons.email),
               ),
               MyTextField(
+                obscureText: true,
                 textEditingController: passwordController,
                 hintText: "Password",
-                icon: Icon(Icons.lock),
+                icon: const Icon(Icons.lock),
               ),
               MyTextField(
+                obscureText: true,
                 textEditingController: confirmPasswordController,
                 hintText: "Konfirmasi Password",
-                icon: Icon(Icons.lock),
+                icon: const Icon(Icons.lock),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               MyButton(
                 onTap: () {
                   register(context, nameController, emailController,
                       passwordController, confirmPasswordController);
                 },
-                child: Text(
+                color: const Color.fromARGB(255, 57, 42, 171),
+                child: const Text(
                   'Register',
                   style: TextStyle(
                     fontSize: 20,
@@ -73,46 +80,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: Colors.white,
                   ),
                 ),
-                color: Color.fromARGB(255, 57, 42, 171),
               ),
-              SizedBox(height: 20),
-              Center(
-                child: Text(
-                  'OR',
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              MyButton(
-                onTap: () {
-                  
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image.asset(
-                      "images/google.png",
-                      height: 20,
-                    ),
-                    Text(
-                      'Register With Google',
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    )
-                  ],
-                ),
-                color: Color.fromARGB(255, 171, 171, 171),
-              ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Sudah memiliki akun? ",
                     style: TextStyle(
                       fontSize: 14,
@@ -123,11 +96,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LoginPage(),
+                          builder: (context) => const LoginPage(),
                         ),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       "Login",
                       style: TextStyle(
                         fontSize: 14,
@@ -160,7 +133,7 @@ class _RegisterPageState extends State<RegisterPage> {
     showDialog(
       context: context,
       builder: (context) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },
@@ -221,7 +194,7 @@ class _RegisterPageState extends State<RegisterPage> {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return AuthPage();
+              return const AuthPage();
             },
           ),
         );
