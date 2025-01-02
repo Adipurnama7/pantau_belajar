@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -52,6 +51,7 @@ class MySchedule extends StatelessWidget {
                       children: [
                         Text(
                           item.title,
+                          overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.poppins(
                             fontSize: 12 + screenWidth * 0.01,
                             color: Colors.black,

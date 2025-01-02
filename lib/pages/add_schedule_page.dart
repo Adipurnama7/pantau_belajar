@@ -44,15 +44,18 @@ class _saveSchedule_AddSchedulePageState extends State<AddSchedulePage> {
 
   // Fungsi untuk menambahkan jadwal baru
   void _saveSchedule(AppUser user) async {
-    String title = titleController.text;
-    String heading = headingController.text;
-    String subheading = subheadingController.text;
-    String description = descriptionController.text;
+    String title = titleController.text.trim();
+    String heading = headingController.text.trim();
+    String subheading = subheadingController.text.trim();
+    String description = descriptionController.text.trim();
 
-    if (title.isEmpty) {
+    if (title.isEmpty ||
+        heading.isEmpty ||
+        subheading.isEmpty ||
+        description.isEmpty) {
       // Tampilkan snackbar jika ada field yang kosong
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Judul harus diisi')));
+          .showSnackBar(SnackBar(content: Text('Semua area harus diisi')));
       return;
     }
 
@@ -195,24 +198,29 @@ class _saveSchedule_AddSchedulePageState extends State<AddSchedulePage> {
                         ),
                         MyTextField(
                           hintText: 'Judul',
+                          maxlength: 15,
                           icon: Icon(Icons.title),
                           textEditingController: titleController,
                         ),
                         MyTextField(
+                          maxlength: 20,
                           hintText: 'Heading',
                           icon: Icon(Icons.text_fields),
                           textEditingController: headingController,
                         ),
                         MyTextField(
-                          hintText: 'Subheading (Tanggal)',
+                          maxlength: 20,
+                          hintText: 'Subheading',
                           icon: Icon(Icons.calendar_today),
                           textEditingController: subheadingController,
                         ),
                         MyTextField(
+                          maxlength: 20,
                           hintText: 'Deskripsi',
                           icon: Icon(Icons.description),
                           textEditingController: descriptionController,
                         ),
+                        const SizedBox(height: 16),
                         MyButton(
                           child: Text(
                             'Tambah Jadwal',
@@ -226,7 +234,6 @@ class _saveSchedule_AddSchedulePageState extends State<AddSchedulePage> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 16),
                 ],
               ),
             );

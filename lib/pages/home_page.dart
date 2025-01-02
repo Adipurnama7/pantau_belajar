@@ -3,6 +3,7 @@ import 'package:intl/intl.dart'; // Untuk memformat tanggal dalam bahasa Indones
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pantau_belajar/components/my_custom_card.dart';
+import 'package:pantau_belajar/pages/main_page.dart';
 import 'package:pantau_belajar/pages/profile_page.dart';
 import 'package:pantau_belajar/services/schedule_service.dart';
 import 'package:pantau_belajar/services/user_service.dart';
@@ -99,21 +100,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return ProfilePage();
-                            },
-                          ),
-                        );
-                      },
-                      child: Image.asset(
-                        'images/avatar.png',
-                        height: 80,
-                      ),
+                    Image.asset(
+                      'images/avatar.png',
+                      height: 80,
                     ),
                   ],
                 ),
@@ -138,35 +127,53 @@ class _HomePageState extends State<HomePage> {
                 SingleChildScrollView(
                   child: Column(
                     children: [
-                      StreamBuilder<List<Map<String, dynamic>>>(
-                        stream: scheduleService.getSchedulesForToday(todayDay!),
+                      FutureBuilder<AppUser?>(
+                        future: userData,
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
                             return const CircularProgressIndicator();
                           } else if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
+                            return SizedBox();
                           } else if (!snapshot.hasData ||
-                              snapshot.data!.isEmpty) {
-                            return Text('Tidak ada kelas untuk hari ini.');
-                          } else {
-                            List<Map<String, dynamic>> schedules =
-                                snapshot.data!;
-                            return ListView.builder(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: schedules.length,
-                              itemBuilder: (context, index) {
-                                var schedule = schedules[index];
-                                return _buildClassCard(
-                                  screenWidth,
-                                  schedule['title'],
-                                  schedule['startTime'],
-                                  schedule['endTime'],
-                                );
-                              },
-                            );
+                              snapshot.data == null) {
+                            return const SizedBox();
                           }
+
+                          // Access the AppUser data
+                          AppUser user = snapshot.data!;
+                          return StreamBuilder<List<Map<String, dynamic>>>(
+                            stream: scheduleService.getSchedulesForToday(
+                                todayDay!, user.uid),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else if (!snapshot.hasData ||
+                                  snapshot.data!.isEmpty) {
+                                return Text('Tidak ada jadwal untuk hari ini.');
+                              } else {
+                                List<Map<String, dynamic>> schedules =
+                                    snapshot.data!;
+                                return ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: schedules.length,
+                                  itemBuilder: (context, index) {
+                                    var schedule = schedules[index];
+                                    return _buildClassCard(
+                                      screenWidth,
+                                      schedule['title'],
+                                      schedule['startTime'],
+                                      schedule['endTime'],
+                                    );
+                                  },
+                                );
+                              }
+                            },
+                          );
                         },
                       ),
                     ],

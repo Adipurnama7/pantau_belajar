@@ -59,10 +59,13 @@ class _AddDetailSchedulePageState extends State<AddDetailSchedulePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 30),
-              Center(child: Icon(Icons.task, size: 80)),
+              Center(
+                child: Icon(Icons.task, size: 80),
+              ),
               const SizedBox(height: 30),
               MyTextField(
                 hintText: 'Judul',
+                maxlength: 25,
                 icon: const Icon(Icons.title),
                 textEditingController: titleController,
               ),
@@ -147,7 +150,7 @@ class _AddDetailSchedulePageState extends State<AddDetailSchedulePage> {
 
   void _onSave() async {
     // Validate inputs
-    if (titleController.text.isEmpty || selectedValue == null) {
+    if (titleController.text.trim().isEmpty || selectedValue == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Judul dan hari wajib diisi')),
       );
@@ -159,6 +162,20 @@ class _AddDetailSchedulePageState extends State<AddDetailSchedulePage> {
         const SnackBar(content: Text('Waktu mulai dan selesai wajib diisi')),
       );
       return;
+    }
+
+    if (startTime != null && endTime != null) {
+      final startMinutes = startTime!.hour * 60 + startTime!.minute;
+      final endMinutes = endTime!.hour * 60 + endTime!.minute;
+
+      if (endMinutes - startMinutes <= 1) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text(
+                  'Waktu mulai harus minimal lebih dari 1 menit sebelum waktu selesai')),
+        );
+        return;
+      }
     }
 
     final newDetailSchedule = DetailSchedule(

@@ -31,8 +31,12 @@ class ScheduleService {
     }
   }
 
-  Stream<List<Schedule>> getSchedulesStream() {
-    return _db.collection('schedules').snapshots().map((snapshot) {
+  Stream<List<Schedule>> getSchedulesStream(String uid) {
+    return _db
+        .collection('schedules')
+        .where('uid', isEqualTo: uid)
+        .snapshots()
+        .map((snapshot) {
       return snapshot.docs.map((doc) {
         return Schedule.fromMap(doc.data());
       }).toList();
@@ -85,7 +89,8 @@ class ScheduleService {
   }
 
   // Fungsi untuk mendapatkan stream detail_schedule untuk hari ini
-  Stream<List<Map<String, dynamic>>> getSchedulesForToday(String todayDay) {
+  Stream<List<Map<String, dynamic>>> getSchedulesForToday(
+      String todayDay, String uid) {
     // Mendapatkan hari ini dalam format Indonesia (misalnya "senin", "selasa", dll)
 
     // Mengembalikan Stream dari Firestore
@@ -102,6 +107,7 @@ class ScheduleService {
             .collection('schedules')
             .doc(scheduleDoc.id)
             .collection('detail_schedule')
+            .where('uid', isEqualTo: uid)
             .where('day', isEqualTo: todayDay) // Filter berdasarkan hari ini
             .get();
 

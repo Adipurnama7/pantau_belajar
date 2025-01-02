@@ -6,6 +6,7 @@ class MyTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final bool obscureText;
   final TextInputType? textInputType;
+  final int? maxlength;
   const MyTextField({
     super.key,
     required this.hintText,
@@ -13,11 +14,13 @@ class MyTextField extends StatelessWidget {
     required this.textEditingController,
     this.obscureText = false,
     this.textInputType = TextInputType.text,
+    this.maxlength,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLength: maxlength,
       obscureText: obscureText,
       controller: textEditingController,
       cursorColor: Colors.grey[800],
