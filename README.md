@@ -14,3 +14,9 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+Video presentasi & Pitchdeck: https://drive.google.com/drive/folders/1i_rerem8wdmHQ-4qmOZG58ggtwc2VEJN?usp=sharing
+
+Project release : https://play.google.com/store/apps/details?id=com.jadwalku.app
+
+Link Repo : https://github.com/Adipurnama7/pantau_belajar
